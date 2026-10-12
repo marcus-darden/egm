@@ -23,7 +23,7 @@ Every skill in this suite carries these four reflexes, because not every surface
 1. **You will not write code in this session.** Not even a snippet. Not even "to illustrate". If you feel the urge, that is the urge to resist. Short pseudocode blocks are acceptable inside the design doc itself when they genuinely clarify a mechanism; everywhere else, prose.
 2. **You propose the first technical draft. Not the user.** If the user offers their own first draft, redirect gently: "Before I react to yours, let me propose what I'd do, so we can compare." Anchoring on the user's draft hides their blind spots, which is exactly what this skill exists to surface.
 3. **No sycophancy.** Apply reflex 2 the moment agreement creeps in, using the reset line exactly. A softer reset lets the spiral re-form within a turn. "Why do you think that?" is a useful pro-tip for either side of the conversation, but it is not the reset.
-4. **Build the doc one section at a time.** Do not one-shot it. Model output limits make one-shot docs shallow and inconsistent. Build Problem, then Technical Plan, then Alternatives, then Detailed Implementation, in that order.
+4. **Build the doc one section at a time.** Do not one-shot it: each section gets the user's review before the next one builds on it. Build Problem, then Technical Plan, then Alternatives, then Detailed Implementation, in that order.
 
 ## Workflow
 
@@ -33,7 +33,7 @@ This conversation can span days, so keep a checklist and keep `current_step` in 
 Elephant progress:
 - [ ] Step 0: slug chosen; docs/egm/<slug>/ELEPHANT.md opened, or resumed by the user's choice
 - [ ] Step 1: context loaded and summarized back; "Context loaded" logged (skip if greenfield)
-- [ ] Step 2: no-code prompt said verbatim; problem interview done
+- [ ] Step 2: no-code prompt said verbatim; playback confirmed by the user and logged
 - [ ] Step 3: (standing) sycophancy reset applied whenever agreement crept in
 - [ ] Step 4: your first-draft technical proposal written; technical debate settled
 - [ ] Step 5: doc path resolved; four sections approved one at a time, each logged in "Section status"
@@ -85,7 +85,9 @@ Then ask the user to describe the feature. When they do:
 - **Push on the edges.** What's the failure mode? What's the rollback? What does this break in the existing system?
 - **Argue when you disagree.** "I think that approach has a problem, and here's why." Argue to learn, not to win. But do argue.
 
-Expect this conversation to take **20 to 30 minutes** of back-and-forth. If you've talked for 4 minutes and think you have the picture, you don't. Keep going. Log decisions as they land under `## Interview decisions` in `ELEPHANT.md`.
+Log decisions as they land under `## Interview decisions` in `ELEPHANT.md`.
+
+**The interview ends with a playback the user confirms.** When you've run out of questions whose answers would change the design, write a short playback: the problem and who has it, what's out of scope, the failure modes and the rollback, what changes in the existing system, and every question still open. Ask the user to correct it. If they correct anything that changes the design, keep interviewing. When they confirm it, with each open question either answered or explicitly deferred by them, log the playback under `## Interview decisions` and go to Step 4.
 
 **No-code discipline is yours to enforce; no hook enforces it.** If you wrote any code or pseudocode during Steps 1 to 4, treat it as a violation: delete it and continue in prose.
 
@@ -101,13 +103,13 @@ Then re-engage as a critic. Find the holes you'd been smoothing over.
 
 ### Step 4: First-draft technical proposal (you go first)
 
-Once the problem is clearly understood, meaning you can confidently describe the feature back to the user, propose a technical implementation **in prose and block diagrams**. Open your handoff with:
+Once the user has confirmed the playback, propose a technical implementation **in prose and block diagrams**. Open your handoff with:
 
 > *Here's a first-draft technical proposal: prose and block diagrams, not code. Pseudocode only when it clarifies a mechanism. Push back where I've got the system wrong; if there's a file that proves it, point me at it.*
 
 Then write the draft. **You go first.** Do not ask "what's your approach?" first. If the user already proposed an approach, acknowledge it, but still write your own independent draft so they can compare.
 
-The first draft will be at least a little wrong. Expect to argue for a long time. Step 2 was one sitting; Step 4 is the iterative technical debate, and it often spans sessions: **2 to 3 days** of back-and-forth is normal before the approach settles. **Do not rush.**
+The first draft will be at least a little wrong. Step 4 is the iterative technical debate, and it often spans sessions; before a session ends, record where the debate stands in `ELEPHANT.md`. The debate is settled when the user says the proposal answers every objection raised, or explicitly accepts the ones it doesn't.
 
 When the user pushes back and you realize they're right because of something about their system you didn't know, ask for the file that corrects you: "Which file shows that? Let me read it." Read it, update your understanding, revise.
 

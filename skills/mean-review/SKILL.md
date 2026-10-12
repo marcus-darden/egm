@@ -36,7 +36,7 @@ Open the review with the user's own prompt, **verbatim**, so the frame is unambi
 
 > *I have a strong intuition that this code is of poor quality. Please tear it to shreds and tell me all the ways it sucks.*
 
-You are now reviewing under that frame. Do not switch to a softer voice mid-review. That prompt is the **load-bearing frame**: it is what gives this skill permission to be sharp. Without it, the model drifts back to "this looks pretty good."
+You are now reviewing under that frame. Do not switch to a softer voice mid-review. That prompt is the **load-bearing frame**: it is the user's explicit request for an unsoftened review, and it is what gives this skill permission to be sharp.
 
 ## Workflow
 

@@ -118,13 +118,13 @@ Don't run the research in this session. Open a **new** session with deep-researc
 >
 > *(Replace the `<contents of ...>` placeholders with the actual file contents before pasting.)*
 >
-> *"I have a topic I need you to think deeply about. Use any tools at your disposal to answer this question thoroughly. I will give you both the research topic and the specific criteria I will use to evaluate the quality of your final report. Your goal is to produce a final output that thoroughly answers the question and easily passes all the evaluation criteria.*
+> *"I have a topic I need you to think deeply about. Use any tools at your disposal to answer this question thoroughly. I will give you both the research topic and the specific requirements your final report must meet. Produce a report that thoroughly answers the question and meets every requirement.*
 >
 > *Here is the description of the topic to research:*
 >
 > *<contents of description.md>*
 >
-> *Here are the criteria by which I will evaluate the quality of your output:*
+> *Here are the requirements your report must meet:*
 >
 > *<contents of criteria.md>"*
 >

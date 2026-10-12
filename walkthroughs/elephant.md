@@ -82,6 +82,18 @@ questions at a time, challenge assumptions, push on failure modes, argue.
 This is the highest-freedom part of the skill. No script can hold a good
 design argument, so the text gives goals and examples, not steps.
 
+What the skill does fix is how the interview ends: with a playback the user
+confirms. The model writes back the problem, who has it, what's out of
+scope, the failure modes and rollback, what changes in the existing
+system, and the questions still open, and the user corrects it or signs
+off. The article's "20 to 30 minutes" is deliberately not in the skill.
+It describes the human's time, and a model can't use it: it has no clock,
+reading a large codebase can take twenty minutes before the first question,
+and a count of turns would only reward asking questions to fill a quota.
+The time estimate tells you what to budget; the playback tells the model
+when it is done. It also hands Step 5 a confirmed draft of the Problem
+section.
+
 **Step 3, the sycophant defense.** A standing instruction, not a one-time
 step. When the conversation gets easy, the model is probably agreeing too
 much.
@@ -90,7 +102,11 @@ much.
 prose and block diagrams, even if the user has one. When the user corrects
 it, the model asks for the file that proves it and reads it. That last habit
 matters. A correction backed by a file changes what the model believes. A
-correction without one tends to change only its apology.
+correction without one tends to change only its apology. The debate is
+settled when the user says the proposal answers every objection raised, or
+explicitly accepts the ones it doesn't. Because this step often spans
+several sessions, the skill records where the debate stands before each one
+ends.
 
 **Step 5, the doc.** The filename must equal the slug. That one rule is what
 lets `/goldfish` and `/egm-implement` find the ledgers from nothing but the
@@ -150,9 +166,11 @@ Step 2 opens with the no-code prompt. Then, one at a time:
 > If an order ships and then is cancelled while the first event is still
 > retrying, which event should the customer see first?
 
-The user hadn't thought about the second one. Twenty minutes later the
-problem is clear, including a decision to give up after 24 hours and mark
-the delivery failed where support can see it.
+The user hadn't thought about the second one. When the model runs out of
+questions that would change the design, it plays the problem back,
+including a decision to give up after 24 hours and mark the delivery failed
+where support can see it. The user corrects the scope (refund webhooks are
+out) and confirms the corrected playback. The model logs it and moves on.
 
 Step 4: the model proposes a durable outbox table, written after commit,
 drained by a worker with exponential backoff, and a dead-letter state. The
@@ -171,9 +189,10 @@ docs/designs/webhook-retries.md`.
 ## What the skill adds to the article
 
 The article supplies the phases, the no-code prompt, the reset, the "you go
-first" rule, the four sections, and the time estimates. The skill adds the
-`docs/egm/<slug>/` folder and `ELEPHANT.md` ledger, the slug-equals-filename
-contract, the refusal to resume silently, the human review gate field, and
+first" rule, the four sections, and the time estimates, which the skill
+leaves to the human. The skill adds the `docs/egm/<slug>/` folder and
+`ELEPHANT.md` ledger, the playback that ends the interview, the
+slug-equals-filename contract, the refusal to resume silently, the human review gate field, and
 the pre-handoff check. Those additions exist so that a design spread over
 three days and five sessions still behaves like one conversation.
 

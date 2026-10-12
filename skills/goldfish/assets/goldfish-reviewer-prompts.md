@@ -143,7 +143,6 @@ prompt: |
       2. The file src/auth/middleware.py is referenced as the integration
          point in §4.1 but does not exist in the tree.
 
-  Do NOT return the implementation plan itself. Do NOT return a summary of
-  what you intend to do. Do NOT return a confidence score on the plan. The
-  verdict and the question list are the entire deliverable.
+  Return only the verdict and the question list - not the implementation
+  plan, a summary of what you intend to do, or a confidence score.
 ```

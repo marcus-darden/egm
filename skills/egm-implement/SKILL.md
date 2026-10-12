@@ -28,7 +28,7 @@ Every skill in this suite carries these four reflexes, because not every surface
 1. **Do not implement until `GOLDFISH.md` says `readiness: ready` AND `human_review_gate` is `passed` or `skipped-solo`.** If either is missing, stop and surface the gap. There is no silent bypass; a human reviewer, or a conscious solo skip, must set the gate.
 2. **Do not implement any file that the design doc's Detailed Implementation section does not enumerate.** If a file outside the doc must change, *stop* and propose a doc update first. Drift is rejected at the source. (The ledger and doc edits for resolved drift are not implementation.)
 3. **`IMPLEMENT.md` is the durable trace.** Every file touched, every decision, every drift goes into `docs/egm/<slug>/IMPLEMENT.md` as it happens, not afterward.
-4. **Hand off to `/mean-review` when done.** The implementation phase ends with a brutal review of the diff. Do not declare the work complete without it.
+4. **End with a handoff to `/mean-review`.** The implementation phase ends by telling the user the diff is ready for a brutal review; the user starts it (Step 6).
 
 ## Workflow
 
