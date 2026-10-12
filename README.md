@@ -93,6 +93,8 @@ you. That is on purpose: the gaps between them are where a human decides.
 egm/
 ├── README.md                  you are here
 ├── LICENSE                    MIT
+├── CHANGELOG.md               what changed in each release, and why
+├── bin/package                zips the skills for claude.ai upload
 ├── agents/                    subagents for goldfish's three reviewers
 │   ├── generalist.md
 │   ├── reviewer.md
@@ -214,3 +216,20 @@ Each of the five pipeline skills has `evals/trigger-evals.json`: twelve
 realistic requests, half of which should load the skill and half of which
 should not (near misses, on purpose). They are the starting point for
 measuring whether a description works.
+
+## Source and releases
+
+This repo is the only source of these skills and agents. Everything else is
+a downstream copy taken from a release tag: your claude.ai upload, a
+course's install instructions, a student's clone. Edit here, never in a
+copy.
+
+A release:
+
+1. Record the change in `CHANGELOG.md`.
+2. Commit, tag (`git tag -a vX.Y.Z`), and push the tag.
+3. Run `bin/package vX.Y.Z` and upload the zips in `dist/` to claude.ai,
+   replacing the skills of the same name. Claude Code picks them up at its
+   next session start.
+4. Anything that pins a tag (a course page, say) moves to the new tag when
+   it is ready to.

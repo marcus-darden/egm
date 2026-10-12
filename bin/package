@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+"""Zip each skill for claude.ai upload.
+
+Usage:
+  bin/package            zip the skills as they are in the working tree
+  bin/package v1.0.0     zip the skills exactly as tagged (use this for a release)
+
+Writes dist/<skill>.zip, one per folder in skills/ that has a SKILL.md.
+Paths inside each zip start at the skill's own folder, as claude.ai expects.
+evals/ is left out: it tests the description and is not part of the running
+skill.
+"""
+import io
+import os
+import subprocess
+import sys
+import tarfile
+import tempfile
+import zipfile
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+IGNORED = {"__pycache__", ".DS_Store", "evals"}
+
+
+def export(tag, into):
+    """Unpack skills/ as of `tag` into `into`, so a release zip never picks
+    up uncommitted edits."""
+    archive = subprocess.run(
+        ["git", "-C", ROOT, "archive", tag, "skills"],
+        check=True, capture_output=True,
+    ).stdout
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
+        # The "data" filter (Python 3.12+, and recent 3.9-3.11 patch releases)
+        # refuses links and absolute paths. The archive comes from our own tag,
+        # so falling back to a plain extract on older Pythons is safe.
+        try:
+            tar.extractall(into, filter="data")
+        except TypeError:
+            tar.extractall(into)
+    return os.path.join(into, "skills")
+
+
+def package(skills):
+    out = os.path.join(ROOT, "dist")
+    os.makedirs(out, exist_ok=True)
+    for name in sorted(os.listdir(skills)):
+        folder = os.path.join(skills, name)
+        if not os.path.isfile(os.path.join(folder, "SKILL.md")):
+            continue
+        archive = os.path.join(out, name + ".zip")
+        with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
+            for here, subdirs, files in os.walk(folder):
+                subdirs[:] = sorted(d for d in subdirs if d not in IGNORED)
+                for file_name in sorted(f for f in files if f not in IGNORED and not f.endswith(".pyc")):
+                    full = os.path.join(here, file_name)
+                    bundle.write(full, os.path.relpath(full, skills))
+        print("packed  dist/{}.zip".format(name))
+
+
+def main():
+    if len(sys.argv) > 2 or (len(sys.argv) == 2 and sys.argv[1] in ("-h", "--help")):
+        print(__doc__.strip())
+        return 0 if len(sys.argv) == 2 else 2
+    if len(sys.argv) == 2:
+        with tempfile.TemporaryDirectory() as tmp:
+            package(export(sys.argv[1], tmp))
+    else:
+        package(os.path.join(ROOT, "skills"))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
