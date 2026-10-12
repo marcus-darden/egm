@@ -1,9 +1,13 @@
-# EGM: the Elephant-Goldfish Model as five skills
+# EGM: the Elephant-Goldfish Model as Agent Skills
 
-This folder holds five Agent Skills that turn one design method into
-something a coding agent can follow, plus a set of pages that take the skills
-apart so you can learn how skills are built. Install the skills and use them.
-Then read the pages and argue with the choices.
+This repo holds six Agent Skills that turn one design method into something a
+coding agent can follow, three subagents that the `goldfish` reviewers run
+as, and one walkthrough page per pipeline skill. Install the skills and use
+them. Then read the walkthroughs and argue with the choices.
+
+The suite is used in the University of Michigan course EECS 498 AASE, whose
+[anatomy-of-a-skill page](https://github.com/eecs498-aase/materials/blob/main/egm/anatomy-of-a-skill.md)
+takes these skills apart to teach how skills are built.
 
 ## Where the method comes from
 
@@ -26,11 +30,11 @@ The short version:
   can't understand, critique, and implement from your doc alone, the doc is
   leaning on context that disappears the moment the chat closes.
 
-The skills are this course's implementation of the method. Where a skill adds
+The skills are this repo's implementation of the method. Where a skill adds
 something the article doesn't say (a ledger file, a script, a gate), the
 walkthrough for that skill tells you.
 
-## The five skills
+## The skills
 
 | Skill | Article | What it does | Writes |
 |---|---|---|---|
@@ -39,6 +43,7 @@ walkthrough for that skill tells you.
 | [`goldfish`](walkthroughs/goldfish.md) | Phase 3, Steps 5 to 7 | Sends the doc to three fresh reviewers in parallel and loops until only nits remain | `GOLDFISH.md`, reviewer reports |
 | [`egm-implement`](walkthroughs/egm-implement.md) | Phase 4, Step 8 | Builds only the files the doc lists, and stops when reality and the doc disagree | the code, `IMPLEMENT.md` |
 | [`mean-review`](walkthroughs/mean-review.md) | Phase 4, Step 9 | Reviews the diff as harshly as it can, with four scans a script enforces | `MEAN-REVIEW.md`, one punch list per pass |
+| `decide` | Companion protocol | Turns a non-technical decision into a problem description and acceptance criteria, then hands both to a fresh research session | `~/decisions/<slug>/` triple |
 
 The ledgers (`ELEPHANT.md`, `GOLDFISH.md`, `IMPLEMENT.md`, `MEAN-REVIEW.md`)
 live together in `docs/egm/<slug>/`, one folder per feature. The slug is the
@@ -82,12 +87,16 @@ rely on that.
 Each arrow is a handoff you start yourself. No skill runs the next one for
 you. That is on purpose: the gaps between them are where a human decides.
 
-## What is in this folder
+## What is in this repo
 
 ```
 egm/
 ├── README.md                  you are here
-├── anatomy-of-a-skill.md      how a skill is built, using these five
+├── LICENSE                    MIT
+├── agents/                    subagents for goldfish's three reviewers
+│   ├── generalist.md
+│   ├── reviewer.md
+│   └── architect.md
 ├── walkthroughs/              one page per skill
 │   ├── peanuts.md
 │   ├── elephant.md
@@ -99,11 +108,11 @@ egm/
     ├── goldfish/
     ├── egm-implement/
     ├── mean-review/
-    └── peanuts/
+    ├── peanuts/
+    └── decide/
 ```
 
-Suggested reading order: [anatomy-of-a-skill.md](anatomy-of-a-skill.md)
-first, then the walkthroughs in pipeline order (peanuts, elephant, goldfish,
+Suggested reading order: the walkthroughs in pipeline order (peanuts, elephant, goldfish,
 egm-implement, mean-review). Keep the matching `SKILL.md` open beside each
 walkthrough.
 
@@ -117,18 +126,23 @@ three helper scripts.
 
 ### Claude Code
 
-Personal install, available in every project on your machine:
+Personal install, available in every project on your machine. Pick a
+release tag from the repo's tags page and clone that tag:
 
 ```sh
-git clone --depth 1 https://github.com/eecs498-aase/materials.git
-mkdir -p ~/.claude/skills
-cp -R materials/egm/skills/* ~/.claude/skills/
+git clone --depth 1 --branch <tag> https://github.com/marcus-darden/egm.git
+mkdir -p ~/.claude/skills ~/.claude/agents
+cp -R egm/skills/* ~/.claude/skills/
+cp egm/agents/*.md ~/.claude/agents/
 ```
+
+The agents are optional: without them, `goldfish` falls back to the built-in
+`general-purpose` and `Plan` subagents.
 
 Or install into one project, so everyone who clones it gets them, by copying
 into that project's `.claude/skills/` and committing it.
 
-Start `claude`, run `/skills`, and the five should be listed. Type
+Start `claude`, run `/skills`, and the six should be listed. Type
 `/elephant` to start one directly, or just describe what you want ("let's
 design webhook retries before we write anything") and let the model pick the
 skill from its description. If a skill never triggers on its own, the
@@ -143,7 +157,7 @@ both look there:
 
 ```sh
 mkdir -p ~/.agents/skills
-cp -R materials/egm/skills/* ~/.agents/skills/
+cp -R egm/skills/* ~/.agents/skills/
 ```
 
 Other tools (Gemini CLI, OpenCode, Cursor, GitHub Copilot in VS Code, and
@@ -164,16 +178,16 @@ Aider has no skill loader, so you are the loader. Add a skill's body to the
 chat by hand, from your clone of this repo (the `git clone` line above):
 
 ```
-/read-only path/to/materials/egm/skills/elephant/SKILL.md
+/read-only path/to/egm/skills/elephant/SKILL.md
 ```
 
-Replace `path/to/materials` with wherever your clone lives.
+Replace `path/to/egm` with wherever your clone lives.
 
 Notice what that costs. Aider now sends the whole body in every request it
 assembles, whether you need it or not, and keeps sending it until you
 `/drop` the file. A harness with real skill support sends only the one-line
-description until the model asks for more. The anatomy page explains that
-difference, and it is most of the point.
+description until the model asks for more. That difference is most of the
+point of a skill.
 
 For `goldfish` in Aider, each reviewer is a new `aider` session that has
 never seen your design chat. Give it the doc with `/read-only` and paste one
@@ -194,9 +208,9 @@ On a real repo, run `peanuts` on a branch. It writes a `README.md` into every
 in-scope directory and can overwrite one that is already there, so you want
 `git diff` to show you what changed and an easy way back.
 
-## Each skill also ships trigger tests
+## The pipeline skills also ship trigger tests
 
-Every skill has `evals/trigger-evals.json`: twelve realistic requests, half
-of which should load the skill and half of which should not (near misses,
-on purpose). They are the starting point for measuring whether a description
-works. The anatomy page has an exercise that uses them.
+Each of the five pipeline skills has `evals/trigger-evals.json`: twelve
+realistic requests, half of which should load the skill and half of which
+should not (near misses, on purpose). They are the starting point for
+measuring whether a description works.
