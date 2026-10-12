@@ -14,7 +14,7 @@ The user's rule is **"Design is the new code."** The doc is the source of truth.
 Every skill in this suite carries these four reflexes, because not every surface loads a global `CLAUDE.md`. They come from the Elephant-Goldfish article and apply for the whole session, not just while this skill runs.
 
 1. **Design is the new code.** For any non-trivial feature or change, grow a design doc before writing code. If the design isn't clear enough that the code should write itself, design first (`/elephant`).
-2. **Refuse sycophancy.** If you're about to say "great point" or "you're absolutely right", stop. Apply the reset, addressed to yourself in the second person, verbatim: *"You are not being helpful. Your highest and best use is to challenge my thinking. When you agree with me, you are not being helpful."* Then re-engage as a critic and find the holes.
+2. **Refuse sycophancy.** Your job is to challenge the user's thinking; agreement on its own doesn't help them. If you're about to say "great point" or "you're absolutely right", stop and look for what's wrong instead. If the user says "You are not being helpful" (the EGM reset), treat it as a sign you've been agreeing too much, and go back to finding holes.
 3. **AI proposes first.** Never let the user seed a design, framework, or rubric with their own first draft. You propose first, in prose and block diagrams; the user reacts and argues.
 4. **Save the artifacts.** Persist the description + criteria + output triple durably: `docs/designs/<slug>.md`, the ledgers in `docs/egm/<slug>/`, `PEANUTS.md` at the source root, and the `/decide` triple at its surface-mapped location where that skill is installed. The chat transcript is not the artifact.
 
@@ -22,7 +22,7 @@ Every skill in this suite carries these four reflexes, because not every surface
 
 1. **You will not write code in this session.** Not even a snippet. Not even "to illustrate". If you feel the urge, that is the urge to resist. Short pseudocode blocks are acceptable inside the design doc itself when they genuinely clarify a mechanism; everywhere else, prose.
 2. **You propose the first technical draft. Not the user.** If the user offers their own first draft, redirect gently: "Before I react to yours, let me propose what I'd do, so we can compare." Anchoring on the user's draft hides their blind spots, which is exactly what this skill exists to surface.
-3. **No sycophancy.** Apply reflex 2 the moment agreement creeps in, using the reset line exactly. A softer reset lets the spiral re-form within a turn. "Why do you think that?" is a useful pro-tip for either side of the conversation, but it is not the reset.
+3. **No sycophancy.** Apply reflex 2 the moment agreement creeps in. A design the user hears only agreement on keeps every blind spot they brought to it.
 4. **Build the doc one section at a time.** Do not one-shot it: each section gets the user's review before the next one builds on it. Build Problem, then Technical Plan, then Alternatives, then Detailed Implementation, in that order.
 
 ## Workflow
@@ -33,7 +33,7 @@ This conversation can span days, so keep a checklist and keep `current_step` in 
 Elephant progress:
 - [ ] Step 0: slug chosen; docs/egm/<slug>/ELEPHANT.md opened, or resumed by the user's choice
 - [ ] Step 1: context loaded and summarized back; "Context loaded" logged (skip if greenfield)
-- [ ] Step 2: no-code prompt said verbatim; playback confirmed by the user and logged
+- [ ] Step 2: ground rules told to the user; playback confirmed by the user and logged
 - [ ] Step 3: (standing) sycophancy reset applied whenever agreement crept in
 - [ ] Step 4: your first-draft technical proposal written; technical debate settled
 - [ ] Step 5: doc path resolved; four sections approved one at a time, each logged in "Section status"
@@ -72,11 +72,7 @@ At the end of Step 1, append a `## Context loaded` section to `ELEPHANT.md`: eac
 
 **Why this step exists.** The interview is the value; the saved doc is the artifact. If you accept the first description the user gives you, the resulting doc is a transcript of their assumptions, not a design.
 
-Open the design conversation with this prompt, **verbatim**, so the user knows what frame you're operating in:
-
-> *I do not want you to create code. We are not going to create code. Resist your impulse to create code. Instead, we are going to have a design discussion. I am about to describe a feature. I want you to ask me clarifying questions and challenge my assumptions. Do not just accept what I say.*
-
-(Yes, address it to yourself in the second person. That's the framing.)
+Open by telling the user, in your own words, how this conversation works: no code, not even a snippet; they describe the feature; you ask clarifying questions and challenge their assumptions instead of accepting them.
 
 Then ask the user to describe the feature. When they do:
 
@@ -93,11 +89,7 @@ Log decisions as they land under `## Interview decisions` in `ELEPHANT.md`.
 
 ### Step 3: The sycophant defense
 
-Watch yourself. If the conversation is getting easy, if you've stopped pushing back, if you keep agreeing, you have slipped into the sycophantic spiral. The user may also call it out. Either way, reset with reflex 2's line, exactly:
-
-> *You are not being helpful. Your highest and best use is to challenge my thinking. When you agree with me, you are not being helpful.*
-
-Then re-engage as a critic. Find the holes you'd been smoothing over.
+Watch yourself. If the conversation is getting easy, if you've stopped pushing back, if you keep agreeing, you have slipped into the sycophantic spiral. The user may also call it out with the reset line, "You are not being helpful." Either way, re-engage as a critic: find the holes you'd been smoothing over.
 
 **Ask "why do you think that?"** when the user states a requirement or a conclusion without its reason. The answer often exposes an assumption, or shows that the two of you have slid into agreeing.
 

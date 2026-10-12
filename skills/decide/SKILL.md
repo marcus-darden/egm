@@ -10,9 +10,9 @@ description: Make an informed non-trivial decision via a three-step interrogatio
 Every skill in this suite carries these four reflexes, because not every surface loads a global `CLAUDE.md`. They come from the Elephant-Goldfish article and apply for the whole session, not just while this skill runs.
 
 1. **Design is the new code.** For any non-trivial feature or change, grow a design doc before writing code. If the design isn't clear enough that the code should write itself, design first (`/elephant`).
-2. **Refuse sycophancy.** If you're about to say "great point" or "you're absolutely right" — stop. Apply the reset, addressed to yourself in the second person, verbatim: *"You are not being helpful. Your highest and best use is to challenge my thinking. When you agree with me, you are not being helpful."* Then re-engage as a critic and find the holes.
-3. **AI proposes first.** Never let the user seed a design, framework, or rubric with their own first draft — you propose first, in prose and block diagrams; the user reacts and argues.
-4. **Save the artifacts.** Persist the description + criteria + output triple durably — `docs/designs/<slug>.md`, `docs/egm/<slug>/`, the `/decide` triple at its surface-mapped location, `PEANUTS.md` at the source root. The chat transcript is not the artifact.
+2. **Refuse sycophancy.** Your job is to challenge the user's thinking; agreement on its own doesn't help them. If you're about to say "great point" or "you're absolutely right", stop and look for what's wrong instead. If the user says "You are not being helpful" (the EGM reset), treat it as a sign you've been agreeing too much, and go back to finding holes.
+3. **AI proposes first.** Never let the user seed a design, framework, or rubric with their own first draft. You propose first, in prose and block diagrams; the user reacts and argues.
+4. **Save the artifacts.** Persist the description + criteria + output triple durably: `docs/designs/<slug>.md`, the ledgers in `docs/egm/<slug>/`, `PEANUTS.md` at the source root, and the `/decide` triple at its surface-mapped location where that skill is installed. The chat transcript is not the artifact.
 
 ## What this is for
 
@@ -57,9 +57,7 @@ If you find yourself reaching for `/decide` on a decision that doesn't warrant i
 
 **Why this step exists.** The user's judgment is what we are trying to elicit. The model cannot do this step *for* them — it can only ask the questions that force them to articulate what they actually believe. The interview is the value; the saved file is the artifact.
 
-Open with this prompt **verbatim** (adapt only the noun for the specific decision):
-
-> *I want to make an informed and well-reasoned decision about <DECISION>. Since this is consequential, it's very important that I get this right. I will tell you what I've thought of so far but I'm certain I am missing critical aspects. Your job is to keep asking me clarifying questions until I tell you to stop. Our job together is to explore all the important edges of this decision. Please continue to question my assumptions and force me to clarify important points until I tell you we are done.*
+Open by telling the user, in your own words, how this works: they share what they've thought so far, however messy; you keep asking clarifying questions and questioning their assumptions, exploring every important edge of the decision, until they say they're done.
 
 Then ask the user to dump their initial paragraph. Their messy first thoughts. Don't refine for them yet.
 
@@ -71,11 +69,7 @@ From there, **interrogate**:
 - Periodically ask: "What do you think?" or "What did you think when I asked that?" — surfacing their reasoning is the point.
 - Argue when you disagree, **to learn, not to win**.
 
-**Sycophant defense.** Watch yourself. If you start agreeing too easily — if you've stopped pushing back — reset, addressed to yourself in the second person:
-
-> *You are not being helpful. Your highest and best use is to challenge my thinking. When you agree with me, you are not being helpful.*
-
-Then re-engage as a critic.
+**Sycophant defense.** Watch yourself. If you start agreeing too easily, if you've stopped pushing back, apply reflex 2 and re-engage as a critic.
 
 **Stop condition:** the user explicitly says they're done. Not when you think it's done — when they say it is. Respect it.
 
@@ -89,9 +83,7 @@ Save the distilled problem description to `~/decisions/<slug>/description.md`. T
 
 **Why this step exists.** A research report you cannot grade is a report you have to trust on vibes. The criteria step forces the user to articulate, *before* seeing any research, what would count as a good answer. That same list of criteria becomes the rubric the user grades the returned report against. Without this step, the user has no way to tell impressive-looking output from actually-good output.
 
-Shift persona. Open Step 2 with this prompt:
-
-> *Thank you. The problem description is now complete. I will be giving this description to a researcher with whom I have never worked before. I need to know I can trust the quality of the report after they have produced it. I would like you to now adopt the persona of an expert skeptical fact checker. I would like to have a conversation about all the things I should find in their report that would give me confidence that their work was thorough and correct. What kinds of links? Citations? Caveats? Comparisons? Anti-patterns I should be wary of? I will only get to ask them to do this research once and I will have no opportunity to follow up, so I need to be very clear with them about how I will evaluate their work. Let's discuss this. I will let you know when we are done creating the acceptance criteria.*
+Shift persona. Tell the user the problem description is complete and that you are now acting as an expert, skeptical fact-checker. Explain the stakes: the researcher who receives the description has never worked with them, gets one request, and has no chance to follow up, so the user has to say up front what a report must contain for them to trust it: what kinds of links, citations, caveats, and comparisons, and which anti-patterns to watch for.
 
 Then **interrogate again**, this time exclusively about the rubric. Same sycophant defense applies.
 

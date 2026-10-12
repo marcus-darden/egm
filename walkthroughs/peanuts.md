@@ -75,9 +75,10 @@ to do by hand without Python.
 **Workflow and checklist.** Step 0 confirms scope and warns about the 50%
 leaf error rate *before* any work, because the user has to budget the review
 time (the article says 5 to 10 minutes per leaf). Steps 1 to 4 are leaves,
-human review, branches, root. Both article prompts appear verbatim, as quoted
-frames, because they are the method; the model is not invited to improve
-them.
+human review, branches, root. The article's two prompts are
+written for a person to type; the skill states what they ask for (a Purpose
+paragraph and a file index, plus how the parts fit at branch level) as steps
+and templates instead of quoting them.
 
 **Retirement clause.** Every README ends with a line saying it is
 scaffolding that design docs will replace. Without it, people preserve stale

@@ -44,7 +44,7 @@ the triggers and wants something else.
 **Opening.** Where the skill sits between `/goldfish` and `/mean-review`,
 and which file has authority over what. The doc is the source of truth and
 `GOLDFISH.md` is the entry gate; `IMPLEMENT.md` is the trace. Then the
-article's Step 8 prompt, quoted as the working frame.
+article's Step 8 prompt, restated as the model's job.
 
 **Hard rules.** Four: no code until ready *and* the human gate is resolved;
 no file the doc doesn't list; log as you go, not afterward; end with a
@@ -170,7 +170,7 @@ The article's Step 8 is a single prompt plus "if it crashes, start a new
 session with the doc". The skill adds the entry gate and its script, the
 rule against unlisted files, the drift procedure, the `IMPLEMENT.md` ledger,
 recorded verification, and the deliberate pause before review. The prompt is
-still there, quoted as the frame.
+still there, restated as the model's job.
 
 ## Review questions and exercises
 

@@ -17,7 +17,7 @@ Invoke as `/goldfish [path-to-design-doc]`.
 Every skill in this suite carries these four reflexes, because not every surface loads a global `CLAUDE.md`. They come from the Elephant-Goldfish article and apply for the whole session, not just while this skill runs.
 
 1. **Design is the new code.** For any non-trivial feature or change, grow a design doc before writing code. If the design isn't clear enough that the code should write itself, design first (`/elephant`).
-2. **Refuse sycophancy.** If you're about to say "great point" or "you're absolutely right", stop. Apply the reset, addressed to yourself in the second person, verbatim: *"You are not being helpful. Your highest and best use is to challenge my thinking. When you agree with me, you are not being helpful."* Then re-engage as a critic and find the holes.
+2. **Refuse sycophancy.** Your job is to challenge the user's thinking; agreement on its own doesn't help them. If you're about to say "great point" or "you're absolutely right", stop and look for what's wrong instead. If the user says "You are not being helpful" (the EGM reset), treat it as a sign you've been agreeing too much, and go back to finding holes.
 3. **AI proposes first.** Never let the user seed a design, framework, or rubric with their own first draft. You propose first, in prose and block diagrams; the user reacts and argues.
 4. **Save the artifacts.** Persist the description + criteria + output triple durably: `docs/designs/<slug>.md`, the ledgers in `docs/egm/<slug>/`, `PEANUTS.md` at the source root, and the `/decide` triple at its surface-mapped location where that skill is installed. The chat transcript is not the artifact.
 

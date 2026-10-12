@@ -17,7 +17,7 @@ Invoke as `/peanuts [source-root]`.
 Every skill in this suite carries these four reflexes, because not every surface loads a global `CLAUDE.md`. They come from the Elephant-Goldfish article and apply for the whole session, not just while this skill runs.
 
 1. **Design is the new code.** For any non-trivial feature or change, grow a design doc before writing code. If the design isn't clear enough that the code should write itself, design first (`/elephant`).
-2. **Refuse sycophancy.** If you're about to say "great point" or "you're absolutely right", stop. Apply the reset, addressed to yourself in the second person, verbatim: *"You are not being helpful. Your highest and best use is to challenge my thinking. When you agree with me, you are not being helpful."* Then re-engage as a critic and find the holes.
+2. **Refuse sycophancy.** Your job is to challenge the user's thinking; agreement on its own doesn't help them. If you're about to say "great point" or "you're absolutely right", stop and look for what's wrong instead. If the user says "You are not being helpful" (the EGM reset), treat it as a sign you've been agreeing too much, and go back to finding holes.
 3. **AI proposes first.** Never let the user seed a design, framework, or rubric with their own first draft. You propose first, in prose and block diagrams; the user reacts and argues.
 4. **Save the artifacts.** Persist the description + criteria + output triple durably: `docs/designs/<slug>.md`, the ledgers in `docs/egm/<slug>/`, `PEANUTS.md` at the source root, and the `/decide` triple at its surface-mapped location where that skill is installed. The chat transcript is not the artifact.
 
@@ -89,9 +89,7 @@ Before touching files:
 Run `next` and take the eligible directories at the current level (on the first pass, the deepest leaves). **Everything eligible at one level may be batched**, because generation is not the judgment gate; the human review afterward is. For each leaf in the batch, keeping each leaf's reasoning separate from the others:
 
 1. Read every code file in the directory (skip vendored and generated code).
-2. Write `README.md` there, using the leaf shape in [assets/readme-templates.md](assets/readme-templates.md): a **Purpose** paragraph and a **File index** with one line per file. Use the article's prompt as the frame:
-
-   > *Read the files in this directory and produce a new file named README.md. This file should (a) explain the purpose of this directory and the files contained in it and (b) enumerate each file in the directory and a short description of its function.*
+2. Write `README.md` there, using the leaf shape in [assets/readme-templates.md](assets/readme-templates.md): a **Purpose** paragraph and a **File index** with one line per file.
 
 3. Set the leaf's status to `needs-human-review` in `PEANUTS.md`, with the date in `updated` and, in `notes`, the descriptions you are least sure about: ambiguous function names, files whose purpose isn't obvious from the code, integration glue.
 
@@ -111,9 +109,7 @@ When `next` lists a branch as eligible (it is at the current level and every imm
 
 1. Read **all the README.md files in its immediate subdirectories**.
 2. Read **the code in this directory only**: files at this level, not recursively.
-3. Write `README.md` using the branch shape: **Purpose** (its role in the larger system), **how the parts fit** (subsystem composition), and a **file index** for files at this level. Use the article's prompt as the frame:
-
-   > *Please read all the README.md files in all the subdirectories below me, then read the code in just this directory and create a file here named README.md. Using that information this file should (a) explain the purpose of this directory and the files contained in it and (b) enumerate each file in the directory and a short description of its function.*
+3. Write `README.md` using the branch shape: **Purpose** (its role in the larger system), **how the parts fit** (subsystem composition), and a **file index** for files at this level.
 
 4. Update `PEANUTS.md`: each immediate child becomes `rolled-up`; this directory becomes `needs-human-review`.
 

@@ -45,11 +45,13 @@ names the rule the whole skill serves. Everything after it can be read as a
 consequence of that paragraph.
 
 **Shared preamble.** Four reflexes, copied into every EGM skill. Reflex 2 is
-the sycophancy reset, worded as a line the model says to itself. (A note on
-sources: the article's Step 3 line is "You are not being helpful. Your
-highest and best use is to challenge my thinking." The skill appends "When
-you agree with me, you are not being helpful," which echoes the article's
-Part 1.)
+the sycophancy reset. In the article it is a line *you* type when the model
+has started agreeing with you: "You are not being helpful. Your highest and
+best use is to challenge my thinking." (The skill adds "When you agree with
+me, you are not being helpful," which echoes the article's Part 1.) The skill
+splits that into two instructions: the model's job is to challenge your
+thinking, and when you say the line, it treats it as a hard reset. Having
+the model recite the line to itself would turn "my thinking" into its own.
 
 **Hard rules.** Four, at the top: no code in this session; you propose the
 first draft, not the user; no sycophancy; build the doc one section at a
@@ -75,9 +77,11 @@ corrected. "A wrong mental model on minute one becomes hallucinated code on
 minute ten." What was read gets logged, so the next session doesn't have to
 re-read it.
 
-**Step 2, the interview.** It opens with the article's no-code prompt,
-verbatim. The model says it to itself in the second person, because that is
-the frame. Then come the instructions for a good interview: one or two
+**Step 2, the interview.** The article's no-code prompt ("I do not want you
+to create code... I want you to ask me clarifying questions and challenge my
+assumptions") is written for you to type to the model. The skill turns it
+into instructions: the model tells you the ground rules in its own words,
+then keeps to them. Then come the instructions for a good interview: one or two
 questions at a time, challenge assumptions, push on failure modes, argue.
 This is the highest-freedom part of the skill. No script can hold a good
 design argument, so the text gives goals and examples, not steps.
@@ -158,7 +162,8 @@ The user corrects one thing: dispatch runs after commit, not inside the
 transaction. The model asks which file shows that, reads it, and logs both
 files under `## Context loaded`.
 
-Step 2 opens with the no-code prompt. Then, one at a time:
+Step 2 opens with the ground rules: no code, the user describes, the model
+asks and challenges. Then, one at a time:
 
 > How long can a customer's endpoint be down before a retried "shipped"
 > event is worse than no event at all?
@@ -201,9 +206,10 @@ three days and five sessions still behaves like one conversation.
 1. Hard rule 2 makes the model propose first even when the user has a draft.
    Describe a design flaw that would survive if the model only reviewed the
    user's draft, and how a model-first proposal could surface it.
-2. Why does the skill quote the no-code prompt verbatim instead of saying
-   "tell yourself not to write code"? Relate your answer to degrees of
-   freedom.
+2. The article's no-code prompt is written for a person to type to the
+   model. Why does the skill turn it into instructions instead of having the
+   model recite it? What would "ask me clarifying questions" mean if the
+   model said it?
 3. Run `/elephant` on a small feature for a project of yours. Count the
    questions the model asked before proposing anything. Did it argue with you
    at least once? If not, use the reset line and note what changed.

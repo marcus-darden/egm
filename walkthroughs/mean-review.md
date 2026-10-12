@@ -49,10 +49,13 @@ model's training before the review starts.
 Without it, a model with both skills installed would reach for the brutal one
 on routine reviews, or the reverse.
 
-**The framing prompt.** Rensin's sentence, verbatim, called "the
-load-bearing frame". This is low freedom on purpose. A paraphrase such as
-"please review critically" is exactly the softer version the model drifts
-back to.
+**The frame.** Rensin's sentence is written for you to type to the model.
+The skill turns it into an instruction instead: review as though you had
+said it, and hold that stance to the last finding. It calls this "the
+load-bearing frame" and keeps the wording strong on purpose, because a
+softer instruction such as "review critically" lets a review go soft. What
+the skill drops is the recitation: a model that opens with "I have a strong
+intuition this code is of poor quality" claims a judgment it hasn't made.
 
 **Checklist.** Six steps, ending in the loop.
 
@@ -193,8 +196,10 @@ every pass.
 
 ## Review questions and exercises
 
-1. Why does the skill insist on the framing prompt *verbatim*? Write a
-   plausible paraphrase and explain how it could let the review go soft.
+1. Rensin's prompt is written for a person to type. Why does the skill turn
+   it into an instruction instead of having the model recite it? Write a
+   softer version of that instruction and explain how it could let the
+   review go soft.
 2. Run `enforced_scans.py` on code you wrote for this course. Pick one
    `10-line` finding and write the comment it wants. Was the comment
    useful, or did the rule misfire? If it misfired, was the span
