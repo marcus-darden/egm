@@ -180,5 +180,5 @@ AI is producing more code than humans can carefully review, so review is shiftin
 - **`/egm-implement`** produces the diffs this skill usually reviews; cross-check its `## Drift` entries against the code.
 - **`/elephant`**: code that diverges from its design doc is a finding in itself.
 - **`/goldfish`** reviews docs; mean-review reviews code. Different artifacts, same skeptical stance.
-- **`/peanuts`**: leaf READMEs are about 50% wrong by default, and mean-review is a fair check on one before it is approved.
+- **`/peanuts`**: leaf READMEs are the least reliable level of that hierarchy, and mean-review is a fair check on one before it is approved.
 - **`/code-review`** (where installed) is the calibrated everyday review.

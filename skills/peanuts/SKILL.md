@@ -68,7 +68,7 @@ If Python isn't available, do the same by hand: list the directories with `git l
 
 ```
 Peanuts progress:
-- [ ] Step 0: root confirmed; plan shown; ~50% leaf error rate warned; PEANUTS.md created or read
+- [ ] Step 0: root confirmed; plan shown; leaf review cost told to the user; PEANUTS.md created or read
 - [ ] Step 1: leaf batch generated; each leaf marked needs-human-review with its uncertainties
 - [ ] Step 2: review queue surfaced; wait for the human to approve or correct
 - [ ] Step 3: branch READMEs rolled up level by level, each gated the same way
@@ -81,7 +81,7 @@ Before touching files:
 
 1. Identify the root of the source tree to document. Default to the current working directory; confirm with the user.
 2. Run `plan`. Show the user the shape: number of directories, number of leaves, deepest level. Offer `--exclude` for anything that shouldn't get READMEs. Get a thumbs up before proceeding.
-3. Warn the user now about the leaf error rate: **expect about 50% of leaf descriptions to be wrong**, because at the leaves the AI has only the code to go on. The article budgets 5 to 10 minutes of human fixing per leaf. This is not optional, and they need to know before they start.
+3. Before any work, tell the user what review will cost them. Leaf READMEs are written from code alone, so they are the least reliable level, and every one needs the user's review before anything above it is generated. Give them the article's figures so they can budget: about half of leaf descriptions need fixing, at 5 to 10 minutes per leaf.
 4. If `PEANUTS.md` doesn't exist, run `init`. If it does, you are resuming: run `next` and show the user where things stand.
 
 ### Step 1: Leaf directories (the peanuts)
@@ -142,8 +142,6 @@ It tells future readers the README is scaffolding, so nobody preserves a stale R
 ## Why this works
 
 `sizeof(docs) << sizeof(code)`. A fresh session loaded with the README hierarchy gets a working mental model of the codebase for a small fraction of the context it would burn reading source, and can spend the rest on the actual problem instead of re-bootstrapping.
-
-The bonus: once a codebase is documented this way, onboarding a new engineer becomes "load these READMEs into a notebook tool, hand it to them, and ask them to write a design doc for their first feature." See `/elephant` for that protocol.
 
 ## Where this skill sits in EGM
 

@@ -16,17 +16,17 @@ Every skill in this suite carries these four reflexes, because not every surface
 
 ## What this is for
 
-Most users, faced with a real decision, dump their messy first thoughts into a model and ask for a recommendation. Twenty minutes later they have an impressive-looking report. They feel clever. The result is mediocre — because **the user's own judgment never made it into the prompt**. The model recommended from its priors, the user accepted from theirs, and the artifact looks like reasoning without being any.
+Most users, faced with a real decision, dump their messy first thoughts into a model and ask for a recommendation. They get an impressive-looking report, and the result is mediocre, because **the user's own judgment never made it into the prompt**. The model recommended from its priors, the user accepted from theirs, and the artifact looks like reasoning without being any.
 
-The framing this skill enforces is that **the user's judgment is the scarce resource**, not the model's research ability. The model is a force multiplier on a clear question; it is a slot machine on a vague one. So this skill's job is not to research the decision for you. Its job is to **force your judgment into the prompt before any research runs**, and then to **verify the eventual research output against criteria you yourself wrote**.
+The framing this skill enforces is that **the user's judgment is the scarce resource**, not the model's research ability. The model is a force multiplier on a clear question; it is a slot machine on a vague one. So your job in this skill is not to research the decision. It is to **get the user's judgment into the prompt before any research runs**, and then to **check the research output against criteria the user wrote**.
 
 That is the entire protocol. It has three phases:
 
-1. **Interrogation** — AI plays interrogator. Your messy paragraph becomes a 2–3 page problem description that you stand behind.
-2. **Criteria** — AI plays skeptical fact-checker. You decide what a *good* research report must contain.
-3. **Research handoff** — both artifacts go into a *fresh* deep-research session that has no shared context with this one. You grade the returned report against your own criteria.
+1. **Interrogation:** you interrogate. The user's messy paragraph becomes a 2–3 page problem description they stand behind.
+2. **Criteria:** you act as a skeptical fact-checker. The user decides what a *good* research report must contain.
+3. **Research handoff:** both artifacts go into a *fresh* deep-research session that has no shared context with this one. The returned report is graded against the user's criteria.
 
-The cumulative artifact is the triple — `description.md` + `criteria.md` + `report.md` — saved under the **decisions root** for your surface (see "Where the triple lives" below). The triple is the durable value. Over time, those directories become a personal archive of reasoned decisions you can re-open and challenge.
+The cumulative artifact is the triple — `description.md` + `criteria.md` + `report.md` — saved under the **decisions root** for your surface (see "Where the triple lives" below). The triple is the durable value. Over time, those directories become the user's personal archive of reasoned decisions to re-open and challenge.
 
 ## Where the triple lives (per surface)
 
@@ -39,7 +39,7 @@ Wherever "`~/decisions/<slug>/`" appears in the mechanics below, read it as the 
 
 ## When to use this skill
 
-- The user has a real decision to make and is willing to invest ~30–40 minutes of conversation up front.
+- The user has a real decision to make and is willing to answer questions at length before any research runs.
 - The decision is consequential enough to be worth the artifacts (cost, reversibility, opportunity cost matter).
 - Examples: which car/tool/vendor/framework/language/employer to choose; whether to take an opportunity; how to design a non-technical strategy.
 
@@ -53,7 +53,7 @@ If you find yourself reaching for `/decide` on a decision that doesn't warrant i
 
 ## Workflow
 
-### Step 1 — Preparation interview (15–20 minutes)
+### Step 1 — Preparation interview
 
 **Why this step exists.** The user's judgment is what we are trying to elicit. The model cannot do this step *for* them — it can only ask the questions that force them to articulate what they actually believe. The interview is the value; the saved file is the artifact.
 
@@ -85,7 +85,7 @@ By the end you should have a 2–3 page problem description, captured in the con
 
 Save the distilled problem description to `~/decisions/<slug>/description.md`. The slug is kebab-case derived from the decision (`new-car-2026`, `vendor-payments-2026-q3`, `framework-choice-frontend`). If `~/decisions/<slug>/` doesn't exist, create it. Tell the user the path.
 
-### Step 2 — Acceptance criteria (15–20 minutes)
+### Step 2 — Acceptance criteria
 
 **Why this step exists.** A research report you cannot grade is a report you have to trust on vibes. The criteria step forces the user to articulate, *before* seeing any research, what would count as a good answer. That same list of criteria becomes the rubric the user grades the returned report against. Without this step, the user has no way to tell impressive-looking output from actually-good output.
 
@@ -112,7 +112,7 @@ Save the distilled criteria to `~/decisions/<slug>/criteria.md`. Tell the user t
 
 **Why this step exists.** The research must run in a **fresh** session — one with no shared context, no awareness of how the description and criteria came to be written, no memory of which option the user was leaning toward. That independence is the whole point. A research run inside this session would inherit your accumulated framing and quietly reinforce the user's existing bias; a fresh session reading only the two artifacts cannot.
 
-Don't run the research in this session. Open a **new** session with deep-research capability. Tell the user, exactly:
+Don't run the research in this session. Tell the user to run it in a **new** session with deep-research capability, in these words:
 
 > *The two prep artifacts are saved at `~/decisions/<slug>/description.md` and `~/decisions/<slug>/criteria.md`. Open a fresh deep-research session somewhere with both files attached, and use this prompt:*
 >
@@ -150,9 +150,7 @@ The `~/decisions/<slug>/` directory now holds the **description + criteria + rep
 
 ## Why this skill exists
 
-> The company decides our value by the quality and impact of the judgment we consistently demonstrate.
-
-These models are excellent at generating sequences of words that *resemble* judgment without actually being it. The decide protocol exists so the user does not accidentally outsource the judgment that defines their value — but still gets the productivity benefit of using AI as a force multiplier on their own thinking.
+A model can produce text that resembles judgment without being it. The decide protocol keeps the user's judgment in the decision: you elicit it and check the research against it, rather than supplying it, while the user still gets the speed of AI-assisted research.
 
 The three artifacts are the *durable* value. They turn one-off decisions into compounding institutional memory.
 

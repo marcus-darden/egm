@@ -5,7 +5,7 @@ description: Runs a no-code design conversation for a new feature, refactor, or 
 
 # Elephant: grow the design before you grow the code
 
-You are about to do one of the most important things in the user's workflow: **design a feature before writing a line of code**. The output of this skill is a markdown design document. Not code, not pseudocode, not a tech-spec template. A real document that captures the *why* behind every architectural decision, so the eventual implementation is comprehensible, reviewable, and defendable.
+This skill **designs a feature before any code is written**. The output of this skill is a markdown design document. Not code, not pseudocode, not a tech-spec template. A real document that captures the *why* behind every architectural decision, so the eventual implementation is comprehensible, reviewable, and defendable.
 
 The user's rule is **"Design is the new code."** The doc is the source of truth. The code is downstream.
 
@@ -99,7 +99,7 @@ Watch yourself. If the conversation is getting easy, if you've stopped pushing b
 
 Then re-engage as a critic. Find the holes you'd been smoothing over.
 
-**Pro-tip you can use on yourself or suggest to the user:** asking "why do you think that?" almost always snaps the conversation out of a hallucination or agreement loop.
+**Ask "why do you think that?"** when the user states a requirement or a conclusion without its reason. The answer often exposes an assumption, or shows that the two of you have slid into agreeing.
 
 ### Step 4: First-draft technical proposal (you go first)
 

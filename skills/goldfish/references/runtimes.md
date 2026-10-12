@@ -15,9 +15,12 @@ SKILL.md does not apply.
 
 Spawn a **fresh, review-capable session with no shared conversation state**.
 Isolated context is the requirement; the persona is a preference. Any runtime
-that can start an isolated subagent session can run a Goldfish round. If yours
-cannot, run each prompt by hand in a brand-new chat that has never seen the
-design conversation, and paste the three reports back.
+that can start an isolated subagent session can run a Goldfish round, and you
+launch all three reviewers yourself. If the runtime cannot start a fresh
+session at all, the round cannot run as designed: stop and tell the user, and
+offer the three prompts for them to run by hand, each in a brand-new chat that
+has never seen the design conversation. Reports they paste back go through
+Step 3 as usual.
 
 ## Runtime mapping table
 

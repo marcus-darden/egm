@@ -6,9 +6,9 @@ compatibility: Needs a harness that can start fresh-context subagents, ideally t
 
 # Goldfish: test the design doc against fresh eyes
 
-The Elephant (your `/elephant` session) holds rich context: every argument, every clarification, every micro-decision. That context lives in *your* head, not in the doc. The Goldfish is the opposite: **a brand-new reviewer with zero shared context**. It only knows what's literally on the page.
+The `/elephant` session that wrote the doc holds rich context: every argument, every clarification, every micro-decision. None of that is in the doc unless it was written down. A Goldfish is the opposite: **a brand-new reviewer with zero shared context**. It only knows what's literally on the page.
 
-If a Goldfish can read the doc and (1) explain the system back to you, (2) find the gaps, and (3) confirm it could implement the feature without further questions, then the doc carries the design. If it can't, the doc is a thin layer over context you'll lose the moment a new session opens.
+If a Goldfish can read the doc and (1) explain the system back, (2) find the gaps, and (3) confirm it could implement the feature without further questions, then the doc carries the design. If it can't, the doc depends on context that disappears when the session ends.
 
 Invoke as `/goldfish [path-to-design-doc]`.
 
@@ -65,7 +65,7 @@ Prepend the preamble to each prompt, replace `<PATH>` with the resolved doc path
 
 ### Step 3: Collate the reports and write the round
 
-Each Goldfish returns its findings raw: long, unranked, often dominated by nits. Rensin's rule of thumb is that about 30% of critic suggestions are highly valuable. Synthesize for the user, real gaps first and nits demoted, so their attention lands where it counts:
+Each Goldfish returns its findings raw: long, unranked, often dominated by nits or by disagreements with design choices rather than gaps. Judge each finding on its merits. Synthesize for the user, real gaps first and nits demoted, so their attention lands where it counts:
 
 - **Comprehension result.** Does A's account of "what this is and how it fits" match what the user intended? Where it doesn't, the doc misled a fresh reader. List each place A misread or filled a gap with an assumption.
 - **Critic findings, ranked.** Real gaps first (missing constraints, unspecified failure modes, contradictions), nits last (wording, ordering, style). Separate "the doc is wrong" from "the doc is right but the critic disagrees with the design choice".
@@ -97,7 +97,7 @@ When the loop ends, set `readiness: ready` in the latest round entry and tell th
 - **Skipping the parallel spawn.** Serial calls are slower and invite letting later Goldfish read earlier outputs, defeating the no-shared-context property.
 - **Leaking the trace through a link.** If the design doc links into `docs/egm/<slug>/`, a reviewer can follow the link to `ELEPHANT.md` and read the design conversation. Remove the link from the doc, or tell all three reviewers that `docs/egm/` is off-limits beyond an existence check, and record any breach in the round's contract note.
 - **Letting the Goldfish skim.** A confident summary that cites no doc sections or file paths means the reviewer didn't read. Re-spawn with a sharper prompt that demands citations to sections, file paths, and line numbers.
-- **Acting on critic findings without judging them.** Apply the 30% heuristic. Not every complaint is a real gap. Surface your judgment to the user instead of silently editing.
+- **Acting on critic findings without judging them.** Not every complaint is a real gap. Surface your judgment to the user instead of silently editing.
 - **Overwriting an earlier round's reports.** Rounds 2 and up get the `-rN` suffix.
 - **Stopping after one round.** One pass rarely settles it. Loop until critiques are trivial.
 
